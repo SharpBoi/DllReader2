@@ -78,7 +78,6 @@ namespace DllReader2
         {
             dlls.Clear();
             visual.Clear();
-            GC.Collect();
         }
 
         private void radioShowModeChange(object sender, RoutedEventArgs e)

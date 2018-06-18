@@ -57,13 +57,17 @@ namespace DllReader2
         {
             clearAssembliesTree();
             clearContentTree();
+
+            GC.Collect();
         }
 
         private void showDllContent(AssemblyDllData dll)
         {
             for (int i = 0; i < dll.Types.Length; i++)
+            {
                 if (dll.Types[i].TypeKeyWord == TypeKeyWords.Class)
                     addTypeContentToTree(dll.Types[i]);
+            }
         }
         private void addTypeContentToTree(AssemblyTypeData type)
         {
@@ -71,25 +75,20 @@ namespace DllReader2
 
             if (type.TypeKeyWord == TypeKeyWords.Class)
             {
-                TreeViewItem item = new TreeViewItem();
-                item.Foreground = Brushes.White;
-                item.FontSize = 20;
-                item.Header = type;
+                TreeViewItem typeItem = createItem(type);
                 for (int i = 0; i < type.DeclaredMethods.Length; i++)
                 {
                     type.DeclaredMethods[i].MethodDescriptionMode = componentsDescriptionMode;
 
                     if (type.DeclaredMethods[i].AccessModifier.HasFlag(MethodAttributes.Public)
                         || type.DeclaredMethods[i].AccessModifier.HasFlag(MethodAttributes.Family))
-                        item.Items.Add(new TreeViewItem()
-                        {
-                            Header = type.DeclaredMethods[i],
-                            Foreground = Brushes.White,
-                            FontSize = 20
-                        });
+                    {
+                        TreeViewItem methodItem = createItem(type.DeclaredMethods[i]);
+                        typeItem.Items.Add(methodItem);
+                    }
                 }
 
-                asmContentTree.Items.Add(item);
+                asmContentTree.Items.Add(typeItem);
             }
         }
         private void changeDescriptionMode(DescriptionMode descriptionMode)
@@ -121,6 +120,17 @@ namespace DllReader2
                     }
                 }
             }
+        }
+
+        private TreeViewItem createItem(object header)
+        {
+            TreeViewItem item = new TreeViewItem();
+
+            item.Header = header;
+            item.Foreground = Brushes.White;
+            item.FontSize = 20;
+
+            return item;
         }
         
         private void clearAssembliesTree()

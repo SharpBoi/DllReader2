@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace DllReader2.AssemblyData
 {
-    public enum TypeKeyWords { Class, Struct, Interface, Enum }
 
     public class AssemblyTypeData
     {
