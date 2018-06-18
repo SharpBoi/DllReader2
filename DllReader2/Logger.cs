@@ -37,7 +37,7 @@ namespace DllReader2
                 }
             }
 
-            logbox.Text += '[' + DateTime.Now.Date.ToString() + "]" + title + msg + "\n";
+            logbox.Text += '[' + DateTime.Now.ToString() + "]" + title + msg + "\n";
         }
         public void Log(List<Exception> excs)
         {
