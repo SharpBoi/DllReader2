@@ -91,7 +91,7 @@ namespace DllReader2
                 asmContentTree.Items.Add(typeItem);
             }
         }
-        private void changeDescriptionMode(DescriptionMode descriptionMode)
+        private void changeConentDescription(DescriptionMode descriptionMode)
         {
             componentsDescriptionMode = descriptionMode;
 
@@ -151,7 +151,7 @@ namespace DllReader2
             set
             {
                 componentsDescriptionMode = value;
-                changeDescriptionMode(value);
+                changeConentDescription(value);
             }
         }
         #endregion
